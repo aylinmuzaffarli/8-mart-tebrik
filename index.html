@@ -4,209 +4,185 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>8 Mart</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
-  :root{
-    --page-bg: #fffaf5;
-    --button-bg: #9f2f2f;
-    --card-bg: #f7efe5;
-    --accent-text: #5a3b32;
-    --white-line: rgba(255,255,255,0.92);
-  }
-
-  html,body{height:100%}
-  body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--page-bg);
-    font-family:"Playfair Display", serif;
-    -webkit-font-smoothing:antialiased;
-    box-sizing:border-box;
-  }
-
-  .container{
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    max-width:520px;
-    padding:24px;
-    box-sizing:border-box;
-  }
-
-  .ripple{
-    position:absolute;
-    width:120px;
-    height:120px;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    border:2px solid rgba(180,60,60,0.25);
-    animation:ripple 4s infinite;
-    pointer-events:none;
-    will-change:transform,opacity;
-  }
-  @keyframes ripple{
-    0%{transform:translate(-50%,-50%) scale(1); opacity:0.6;}
-    100%{transform:translate(-50%,-50%) scale(2.2); opacity:0;}
-  }
-
-  .button{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    background:var(--button-bg);
-    border:none;
-    color:white;
-    font-size:18px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    transition:transform .18s ease, opacity .18s ease;
-    z-index:2;
-  }
-  .button:active{ transform:scale(.98) }
-
-  .hidden{ display:none !important; }
-
-  /* CARD: mobile-first — column: text above image */
-  .expanded{
-    width:90vw;
-    max-width:520px;
-    border-radius:22px;
-    background:var(--card-bg);
-    display:flex;
-    flex-direction:column;         /* stack on mobile */
-    padding:18px;
-    box-sizing:border-box;
-    gap:12px;
-    align-items:stretch;
-    justify-content:flex-start;
-    border:1px solid var(--white-line);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-    transform-origin:center;
-    opacity:0;
-    transform:translateY(10px) scale(.995);
-    transition:opacity .36s ease, transform .36s ease;
-  }
-
-  .expanded.show{
-    opacity:1;
-    transform:none;
-  }
-
-  .text{
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
-    color:var(--accent-text);
-    padding:12px;
-    box-sizing:border-box;
-  }
-
-  .image{
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:16px;
-    color:var(--accent-text);
-    background:rgba(255,255,255,0.35);
-    border-radius:12px;
-    padding:12px;
-    box-sizing:border-box;
-    min-height:90px;
-  }
-
-  /* Desktop / larger screens: place image to the right of text */
-  @media(min-width:700px){
-    .ripple{ width:140px; height:140px; border-width:2px }
-    .button{ width:140px; height:140px; font-size:20px }
-    .expanded{
-      flex-direction:row;         /* side-by-side on larger screens */
-      height:300px;
-      gap:16px;
-      padding:20px;
-    }
-    .text{
-      flex:1;
-      font-size:20px;
-      padding:8px;
-    }
-    .image{
-      flex:1;
-      min-height:0;
-      border-radius:14px;
-      padding:8px;
-    }
-  }
+:root{
+--page-bg: #fffaf5;
+--button-bg: #9f2f2f;
+--card-bg: #f7efe5;
+--accent-text: #5a3b32;
+--white-line: rgba(255,255,255,0.92);
+}
+html,body{height:100%}
+body{
+margin:0;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:var(--page-bg);
+font-family:"Playfair Display", serif;
+-webkit-font-smoothing:antialiased;
+box-sizing:border-box;
+}
+.container{
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+width:100%;
+max-width:520px;
+padding:24px;
+box-sizing:border-box;
+}
+.ripple{
+position:absolute;
+width:120px;
+height:120px;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+border-radius:50%;
+border:2px solid rgba(180,60,60,0.25);
+animation:ripple 4s infinite;
+pointer-events:none;
+will-change:transform,opacity;
+}
+@keyframes ripple{
+0%{transform:translate(-50%,-50%) scale(1); opacity:0.6;}
+100%{transform:translate(-50%,-50%) scale(2.2); opacity:0;}
+}
+.button{
+width:120px;
+height:120px;
+border-radius:50%;
+background:var(--button-bg);
+border:none;
+color:white;
+font-size:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+transition:transform .18s ease, opacity .18s ease;
+z-index:2;
+}
+.button:active{ transform:scale(.98) }
+.hidden{ display:none !important; }
+/* CARD: mobile-first — column: text above image */
+.expanded{
+width:90vw;
+max-width:520px;
+border-radius:22px;
+background:var(--card-bg);
+display:flex;
+flex-direction:column; /* stack on mobile */
+padding:18px;
+box-sizing:border-box;
+gap:12px;
+align-items:stretch;
+justify-content:flex-start;
+border:1px solid var(--white-line);
+box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+transform-origin:center;
+opacity:0;
+transform:translateY(10px) scale(.995);
+transition:opacity .36s ease, transform .36s ease;
+}
+.expanded.show{
+opacity:1;
+transform:none;
+}
+.text{
+width:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+color:var(--accent-text);
+padding:12px;
+box-sizing:border-box;
+}
+.image{
+width:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:16px;
+color:var(--accent-text);
+background:rgba(255,255,255,0.35);
+border-radius:12px;
+padding:12px;
+box-sizing:border-box;
+min-height:90px;
+}
+/* Desktop / larger screens: place image to the right of text */
+@media(min-width:700px){
+.ripple{ width:140px; height:140px; border-width:2px }
+.button{ width:140px; height:140px; font-size:20px }
+.expanded{
+flex-direction:row; /* side-by-side on larger screens */
+height:300px;
+gap:16px;
+padding:20px;
+}
+.text{
+flex:1;
+font-size:20px;
+padding:8px;
+}
+.image{
+flex:1;
+min-height:0;
+border-radius:14px;
+padding:8px;
+}
+}
 </style>
 </head>
 <body>
-
-  <div class="container" id="container">
-    <div class="ripple" id="ripple"></div>
-
-    <button class="button" id="button" aria-expanded="false" aria-controls="card">
-      Aç
-    </button>
-  </div>
-
-  <div class="expanded hidden" id="card" role="region" aria-label="8 Mart kart">
-    <div class="text">text</div>
-    <div class="image">image</div>
-  </div>
-
+<div class="container" id="container">
+<div class="ripple" id="ripple"></div>
+<button class="button" id="button" aria-expanded="false" aria-controls="card">
+Aç
+</button>
+</div>
+<div class="expanded hidden" id="card" role="region" aria-label="8 Mart kart">
+<div class="text">Əziz müəlliməm,<br><br>Bizə göstərdiyiniz diqqət, səbir və biliklər üçün təşəkkür edirəm.<br><br>Sizin kimi müəllimə sahib olmaq böyük xoşbəxtlikdir.<br><br>8 Mart bayramınız mübarək!</div>
+<div class="image"><img src="images/hearts.jpeg" alt="hearts" style="max-width:100%;height:auto;display:block;border-radius:8px;"></div>
+</div>
 <script>
-  const button = document.getElementById('button');
-  const ripple = document.getElementById('ripple');
-  const container = document.getElementById('container');
-  const card = document.getElementById('card');
-
-  function openCard(){
-    container.classList.add('hidden');
-    card.classList.remove('hidden');
-
-    // ensure transition runs: force a repaint then add show
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => card.classList.add('show'));
-    });
-
-    button.setAttribute('aria-expanded','true');
-
-    // move focus to the card for keyboard users
-    card.setAttribute('tabindex','-1');
-    card.focus({preventScroll:true});
-  }
-
-  button.addEventListener('click', openCard);
-
-  // allow closing with Escape when card open
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && card.classList.contains('show')) {
-      card.classList.remove('show');
-      setTimeout(() => {
-        card.classList.add('hidden');
-        container.classList.remove('hidden');
-        button.setAttribute('aria-expanded','false');
-        button.focus({preventScroll:true});
-      }, 360);
-    }
-  });
-
-  // safety: ensure ripple never blocks clicks
-  if (ripple) ripple.style.pointerEvents = 'none';
+const button = document.getElementById('button');
+const ripple = document.getElementById('ripple');
+const container = document.getElementById('container');
+const card = document.getElementById('card');
+function openCard(){
+container.classList.add('hidden');
+card.classList.remove('hidden');
+// ensure transition runs: force a repaint then add show
+requestAnimationFrame(() => {
+requestAnimationFrame(() => card.classList.add('show'));
+});
+button.setAttribute('aria-expanded','true');
+// move focus to the card for keyboard users
+card.setAttribute('tabindex','-1');
+card.focus({preventScroll:true});
+}
+button.addEventListener('click', openCard);
+// allow closing with Escape when card open
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && card.classList.contains('show')) {
+card.classList.remove('show');
+setTimeout(() => {
+card.classList.add('hidden');
+container.classList.remove('hidden');
+button.setAttribute('aria-expanded','false');
+button.focus({preventScroll:true});
+}, 360);
+}
+});
+// safety: ensure ripple never blocks clicks
+if (ripple) ripple.style.pointerEvents = 'none';
 </script>
-
 </body>
 </html>
