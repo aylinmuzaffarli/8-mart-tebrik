@@ -89,20 +89,28 @@ opacity:0;
 transform:translateY(10px) scale(.995);
 transition:opacity .36s ease, transform .36s ease;
 }
+/* show */
 .expanded.show{
 opacity:1;
 transform:none;
 }
+/* TEXT: responsive sizing so the copy fits the rectangle */
 .text{
 width:100%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:18px;
+font-size: clamp(15px, 3.2vw, 20px); /* responsive */
+line-height:1.45;
+text-align:center;
 color:var(--accent-text);
 padding:12px;
 box-sizing:border-box;
+word-break:break-word;
+hyphens:auto;
 }
+
+/* IMAGE container */
 .image{
 width:100%;
 display:flex;
@@ -116,6 +124,18 @@ padding:12px;
 box-sizing:border-box;
 min-height:90px;
 }
+
+/* ensure the actual <img> fills its area without overflow */
+.image img{
+max-width:100%;
+max-height:100%;
+width:100%;
+height:auto;
+object-fit:contain;
+display:block;
+border-radius:8px;
+}
+
 /* Desktop / larger screens: place image to the right of text */
 @media(min-width:700px){
 .ripple{ width:140px; height:140px; border-width:2px }
@@ -128,8 +148,9 @@ padding:20px;
 }
 .text{
 flex:1;
-font-size:20px;
+font-size: clamp(16px, 1.6vw, 20px);
 padding:8px;
+align-items:center;
 }
 .image{
 flex:1;
@@ -142,44 +163,56 @@ padding:8px;
 </head>
 <body>
 <div class="container" id="container">
-<div class="ripple" id="ripple"></div>
-<button class="button" id="button" aria-expanded="false" aria-controls="card">
-Aç
-</button>
+  <div class="ripple" id="ripple"></div>
+
+  <button class="button" id="button" aria-expanded="false" aria-controls="card">
+    Aç
+  </button>
 </div>
+
 <div class="expanded hidden" id="card" role="region" aria-label="8 Mart kart">
-<div class="text">Əziz müəlliməm,<br><br>Bizə göstərdiyiniz diqqət, səbir və biliklər üçün təşəkkür edirəm.<br><br>Sizin kimi müəllimə sahib olmaq böyük xoşbəxtlikdir.<br><br>8 Mart bayramınız mübarək!</div>
-<div class="image"><img src="images/hearts.jpeg" alt="hearts" style="max-width:100%;height:auto;display:block;border-radius:8px;"></div>
+  <div class="text">
+    Əziz müəlliməm,<br><br>
+    Bizə göstərdiyiniz diqqət, səbir və biliklər üçün təşəkkür edirəm.<br><br>
+    Sizin kimi müəllimə sahib olmaq böyük xoşbəxtlikdir.<br><br>
+    8 Mart bayramınız mübarək!
+  </div>
+
+  <div class="image">
+    <!-- raw.githubusercontent URL so GitHub-hosted image loads correctly -->
+    <img src="https://raw.githubusercontent.com/aylinmuzaffarli/8-mart-tebrik/main/hearts.jpeg" alt="hearts">
+  </div>
 </div>
+
 <script>
 const button = document.getElementById('button');
 const ripple = document.getElementById('ripple');
 const container = document.getElementById('container');
 const card = document.getElementById('card');
 function openCard(){
-container.classList.add('hidden');
-card.classList.remove('hidden');
-// ensure transition runs: force a repaint then add show
-requestAnimationFrame(() => {
-requestAnimationFrame(() => card.classList.add('show'));
-});
-button.setAttribute('aria-expanded','true');
-// move focus to the card for keyboard users
-card.setAttribute('tabindex','-1');
-card.focus({preventScroll:true});
+  container.classList.add('hidden');
+  card.classList.remove('hidden');
+  // ensure transition runs: force a repaint then add show
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => card.classList.add('show'));
+  });
+  button.setAttribute('aria-expanded','true');
+  // move focus to the card for keyboard users
+  card.setAttribute('tabindex','-1');
+  card.focus({preventScroll:true});
 }
 button.addEventListener('click', openCard);
 // allow closing with Escape when card open
 document.addEventListener('keydown', (e) => {
-if (e.key === 'Escape' && card.classList.contains('show')) {
-card.classList.remove('show');
-setTimeout(() => {
-card.classList.add('hidden');
-container.classList.remove('hidden');
-button.setAttribute('aria-expanded','false');
-button.focus({preventScroll:true});
-}, 360);
-}
+  if (e.key === 'Escape' && card.classList.contains('show')) {
+    card.classList.remove('show');
+    setTimeout(() => {
+      card.classList.add('hidden');
+      container.classList.remove('hidden');
+      button.setAttribute('aria-expanded','false');
+      button.focus({preventScroll:true});
+    }, 360);
+  }
 });
 // safety: ensure ripple never blocks clicks
 if (ripple) ripple.style.pointerEvents = 'none';
